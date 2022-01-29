@@ -1,0 +1,3 @@
+- project cards need to link to project details page
+- Social links need icons and URLs
+- Color scheme

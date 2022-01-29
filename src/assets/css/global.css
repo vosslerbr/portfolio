@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 :root {
   --main-font: 'Montserrat', sans-serif;
@@ -20,16 +20,21 @@ body {
 }
 
 a {
+  color: black;
   text-decoration: none;
+  transition: 0.1s;
 }
 
-.router-link-active:not(#logoLink) {
-  border-bottom: 2px solid black;
+.router-link-active:not(#logo-link) {
+  font-weight: bold;
+  margin-left: 1rem;
+  display: inline-block;
+  width: 100%;
 }
 
 header {
   height: 3rem;
-  background-color: rgb(246, 197, 91);
+  background-color: rgb(63, 64, 68);
   position: sticky;
   top: 0;
   padding: 0px 2rem;
@@ -43,7 +48,7 @@ aside {
   width: 20rem;
   background-color: rgb(91, 189, 246);
   height: calc(100vh - 3rem);
-  padding: 2rem;
+  padding: 2rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,9 +57,24 @@ aside {
 .page {
   margin-left: 20rem;
   padding: 2rem;
+  min-height: calc(100vh - 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .page-content {
   margin: auto;
   width: fit-content;
+  max-width: 960px;
+}
+
+.page-content h2 {
+  font-size: 3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  white-space: nowrap;
+  line-height: 0.75;
+  margin-bottom: 2rem;
 }

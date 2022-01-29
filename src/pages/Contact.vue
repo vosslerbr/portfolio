@@ -5,7 +5,7 @@ const count = ref(0);
 </script>
 
 <template>
-  <div class="page-container">
+  <div class="page-content">
     <h2>Contact</h2>
     <p>Contact Form</p>
     <p>Contact paragraph</p>

@@ -2,9 +2,12 @@
   <div class="page-content">
     <h2>Projects</h2>
 
-    <p v-if="loading">Loading projects...</p>
-    <p v-else-if="errorOccurred">An error occurred.</p>
-    <ProjectCard v-else v-for="(project, index) in projects" :key="index" :project="project" />
+    <div id="card-container">
+      <p v-if="loading">Loading projects...</p>
+      <p v-else-if="errorOccurred">An error occurred.</p>
+
+      <ProjectCard v-else v-for="(project, index) in projects" :key="index" :project="project" />
+    </div>
   </div>
 </template>
 
@@ -34,4 +37,10 @@ onMounted(async () => {
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+#card-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 2rem;
+}
+</style>
