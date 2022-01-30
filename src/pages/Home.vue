@@ -1,7 +1,9 @@
 <template>
-  <div class="page-content" id="home-page-content">
-    <h1>Hi, I'm Brady</h1>
-    <h2>I'm a web developer</h2>
+  <div class="page" id="home-page">
+    <div class="page-content" id="home-page-content">
+      <h1>Hi, I'm Brady</h1>
+      <h2>I'm a web developer</h2>
+    </div>
   </div>
 </template>
 

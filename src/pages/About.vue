@@ -23,11 +23,13 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="page-content">
-    <h2>About</h2>
-    <p v-for="(section, index) in about_sections" :key="index">
-      {{ section.attributes.about_paragraph }}
-    </p>
+  <div class="page">
+    <div class="page-content">
+      <h2>About</h2>
+      <p v-for="(section, index) in about_sections" :key="index">
+        {{ section.attributes.about_paragraph }}
+      </p>
+    </div>
   </div>
 </template>
 

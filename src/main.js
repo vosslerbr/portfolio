@@ -15,10 +15,10 @@ import Contact from './pages/Contact.vue';
 
 // Define our routes for each page
 const routes = [
-  { path: '/', component: Home },
-  { path: '/projects', component: Projects },
-  { path: '/about', component: About },
-  { path: '/contact', component: Contact },
+  { path: '/', component: Home, meta: { title: "Brady's Portfolio | Home" } },
+  { path: '/projects', component: Projects, meta: { title: "Brady's Portfolio | Projects" } },
+  { path: '/about', component: About, meta: { title: "Brady's Portfolio | About" } },
+  { path: '/contact', component: Contact, meta: { title: "Brady's Portfolio | Contact" } },
 ];
 
 // Initialize the router
@@ -26,6 +26,15 @@ const router = createRouter({
   // 4. Provide the history implementation to use. We are using the hash history for simplicity here.
   history: createWebHistory(),
   routes, // short for `routes: routes`
+});
+
+// this will update the document <title> for the routes
+router.afterEach((to) => {
+  if (to.meta.title) {
+    document.title = `${to.meta.title}`;
+  } else {
+    document.title = "Brady's Portfolio";
+  }
 });
 
 // Initialize app, set to use our router, mount the app
