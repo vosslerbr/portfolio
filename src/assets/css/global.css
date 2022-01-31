@@ -85,3 +85,7 @@ aside {
   line-height: 0.75;
   margin-bottom: 2rem;
 }
+
+p {
+  max-width: 800px;
+}

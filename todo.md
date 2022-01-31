@@ -1,3 +1,3 @@
 - project cards need to link to project details page
-- Social links need icons and URLs
+- Mobile layout
 - Color scheme

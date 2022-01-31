@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import AboutSection from '../components/AboutSection.vue';
+import AboutSectionReverse from '../components/AboutSectionReverse.vue';
 
 // Projects page state
 const loading = ref(false);
@@ -26,15 +28,32 @@ onMounted(async () => {
   <div class="page">
     <div class="page-content">
       <h2>About</h2>
-      <p v-for="(section, index) in about_sections" :key="index">
-        {{ section.attributes.about_paragraph }}
-      </p>
+      <div id="section-container">
+        <p v-if="loading">Loading projects...</p>
+        <p v-else-if="errorOccurred">An error occurred.</p>
+
+        <div
+          v-else
+          v-for="(about_section, index) in about_sections"
+          :key="index"
+          class="about-section-container"
+        >
+          <AboutSectionReverse v-if="index % 2 === 0" :about_section="about_section" />
+          <AboutSection v-else :about_section="about_section" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-h1 {
-  color: #b83f90;
+#section-container {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-gap: 2rem;
+}
+
+.about-section-container {
+  grid-column: span 12;
 }
 </style>

@@ -12,6 +12,7 @@ import Home from './pages/Home.vue';
 import Projects from './pages/Projects.vue';
 import About from './pages/About.vue';
 import Contact from './pages/Contact.vue';
+import Project from './pages/Project.vue';
 
 // Define our routes for each page
 const routes = [
@@ -19,6 +20,11 @@ const routes = [
   { path: '/projects', component: Projects, meta: { title: "Brady's Portfolio | Projects" } },
   { path: '/about', component: About, meta: { title: "Brady's Portfolio | About" } },
   { path: '/contact', component: Contact, meta: { title: "Brady's Portfolio | Contact" } },
+  {
+    path: '/project/:id',
+    component: Project,
+    meta: { title: "Brady's Portfolio | Project Detail" },
+  },
 ];
 
 // Initialize the router

@@ -1,17 +1,19 @@
 <template>
   <div class="project-card">
-    <div>
-      <img
-        v-bind:src="`http://localhost:1337${project.attributes.thumbnail.data.attributes.formats.medium.url}`"
-        v-bind:alt="project.attributes.thumbnail.data.attributes.alternativeText"
-      />
-    </div>
-    <h3>{{ project.attributes.title }}</h3>
-    <ul>
-      <li v-for="(tag, index) in project.attributes.tags.data" :key="index">
-        {{ tag.attributes.name }}
-      </li>
-    </ul>
+    <router-link :to="{ path: '/project/' + project.id }">
+      <div>
+        <img
+          v-bind:src="`http://localhost:1337${project.attributes.thumbnail.data.attributes.formats.medium.url}`"
+          v-bind:alt="project.attributes.thumbnail.data.attributes.alternativeText"
+        />
+      </div>
+      <h3>{{ project.attributes.title }}</h3>
+      <ul>
+        <li v-for="(tag, index) in project.attributes.tags.data" :key="index">
+          {{ tag.attributes.name }}
+        </li>
+      </ul></router-link
+    >
   </div>
 </template>
 
@@ -54,5 +56,9 @@ li {
   margin-right: 0.5rem;
   font-size: 0.75rem;
   opacity: 0.75;
+}
+
+a {
+  display: inline-block;
 }
 </style>

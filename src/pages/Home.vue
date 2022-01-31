@@ -28,5 +28,6 @@ h2 {
   text-transform: uppercase;
   white-space: nowrap;
   line-height: 0.75;
+  margin: 0px;
 }
 </style>
