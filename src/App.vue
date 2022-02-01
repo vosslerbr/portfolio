@@ -9,7 +9,64 @@
       <router-link to="/" id="logo-link"><img src="./assets/images/b-logo.svg" /></router-link>
     </header>
 
-    <aside>
+    <aside id="desktop-nav">
+      <nav>
+        <ul>
+          <li>
+            <router-link to="/">
+              <div style="width: 20px; margin-right: 0.25rem"><HomeIcon /></div>
+              Home</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/projects"
+              ><div style="width: 20px; margin-right: 0.25rem">
+                <CollectionIcon />
+              </div>
+              Projects</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/about"
+              ><div style="width: 20px; margin-right: 0.25rem">
+                <UserCircleIcon />
+              </div>
+              About</router-link
+            >
+          </li>
+          <li>
+            <router-link to="/contact"
+              ><div style="width: 20px; margin-right: 0.25rem">
+                <AtSymbolIcon />
+              </div>
+              Contact</router-link
+            >
+          </li>
+        </ul>
+      </nav>
+      <div>
+        <div id="social-links">
+          <a
+            v-for="(contact_card, index) in contact_cards"
+            :key="index"
+            v-bind:href="contact_card.attributes.link"
+            target="_blank"
+            ><i
+              v-bind:class="`pi ${contact_card.attributes.icon}`"
+              v-bind:style="`color: ${contact_card.attributes.icon_color}`"
+            ></i
+          ></a>
+        </div>
+        <footer>
+          <p>&copy; {{ new Date().getFullYear() }} Brady Vossler</p>
+          <p>
+            Made with ❤️ using
+            <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a>
+          </p>
+        </footer>
+      </div>
+    </aside>
+    <aside id="mobile-nav">
       <nav>
         <ul>
           <li>
@@ -101,35 +158,51 @@ onMounted(async () => {
   }
 });
 
+const showHideNav = () => {
+  const topMenuLine = document.getElementById('mobile-menu-line1');
+  const centerMenuLine = document.getElementById('mobile-menu-line2');
+  const bottomMenuLine = document.getElementById('mobile-menu-line3');
+
+  if (mobileMenuOpen.value) {
+    // if the mobile menu is open, close it
+    document.getElementById('mobile-nav').style.transform = 'translate(-20rem, 0)';
+
+    centerMenuLine.style.opacity = '1';
+    topMenuLine.className = 'mobile-menu-line';
+    bottomMenuLine.className = 'mobile-menu-line';
+
+    mobileMenuOpen.value = false;
+  } else {
+    // otherwise, open it
+    document.getElementById('mobile-nav').style.transform = 'translate(20rem, 0)';
+    centerMenuLine.style.opacity = '0';
+    topMenuLine.className = 'mobile-menu-line top-menu-line-open';
+    bottomMenuLine.className = 'mobile-menu-line bottom-menu-line-open';
+
+    mobileMenuOpen.value = true;
+  }
+};
+
 const handleMobileMenuOpen = async (isNavLink?: boolean) => {
   // if nav link is what's closing the menu, introduce a small delay so it doesn't QUITE close instantly
   if (isNavLink) {
     setTimeout(() => {
-      if (mobileMenuOpen.value) {
-        // if the mobile menu is open, close it
-        document.querySelector('aside').style.transform = 'translate(-20rem, 0)';
-        mobileMenuOpen.value = false;
-      } else {
-        // otherwise, open it
-        document.querySelector('aside').style.transform = 'translate(20rem, 0)';
-        mobileMenuOpen.value = true;
-      }
+      showHideNav();
     }, 200);
   } else {
-    if (mobileMenuOpen.value) {
-      // if the mobile menu is open, close it
-      document.querySelector('aside').style.transform = 'translate(-20rem, 0)';
-      mobileMenuOpen.value = false;
-    } else {
-      // otherwise, open it
-      document.querySelector('aside').style.transform = 'translate(20rem, 0)';
-      mobileMenuOpen.value = true;
-    }
+    showHideNav();
   }
 };
 </script>
 
 <style scoped>
+.top-menu-line-open {
+  transform: translateY(0.63rem) rotate(45deg);
+}
+.bottom-menu-line-open {
+  transform: translateY(-0.62rem) rotate(-45deg);
+}
+
 #mobile-menu {
   display: flex;
   flex-direction: column;
@@ -137,14 +210,15 @@ const handleMobileMenuOpen = async (isNavLink?: boolean) => {
   height: 1.5rem;
   position: relative;
   left: -100px;
-  transition: 0.1s;
+  transition: 0.2s;
 }
 
 .mobile-menu-line {
   border-radius: 400px;
   width: 1.75rem;
   height: 0.25rem;
-  background-color: rgb(255, 255, 255);
+  background-color: #fff;
+  transition: 0.2s;
 }
 
 #logo-link {
@@ -158,13 +232,24 @@ aside {
   position: fixed;
   top: 3rem;
   width: 20rem;
-  background-color: rgb(83, 102, 114);
   height: calc(100vh - 3rem);
   padding: 2rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  transition: 0.3s;
+  transition: 0.2s;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.13);
+  background-color: #fff;
+  box-shadow: 0px 8px 15px #05212725;
+}
+
+nav a,
+nav i {
+  color: #052127;
+}
+
+#mobile-nav {
+  display: none;
 }
 
 ul {
@@ -189,6 +274,7 @@ li a {
 #social-links i {
   margin-right: 1rem;
   font-size: 1.25rem;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.26);
 }
 
 footer {
@@ -206,10 +292,19 @@ footer a {
 }
 
 @media screen and (max-width: 960px) {
+  #desktop-nav {
+    left: -20rem;
+  }
+
+  #mobile-nav {
+    display: flex;
+  }
+
   #mobile-menu {
     position: relative;
     left: 0px;
   }
+
   #logo-link {
     margin-left: 1rem;
   }

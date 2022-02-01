@@ -1,6 +1,6 @@
 <template>
   <div class="about-section">
-    <div>
+    <div class="img-container">
       <img
         v-bind:src="`http://localhost:1337${about_section.attributes.image.data.attributes.formats.large.url}`"
         v-bind:alt="about_section.attributes.image.data.attributes.alternativeText"
@@ -37,19 +37,65 @@ p:not(:last-of-type) {
   margin-bottom: 1rem;
 }
 
-.about-section .paragraphs-container {
+.paragraphs-container {
   grid-column: span 7;
   height: fit-content;
   margin: auto;
   line-height: 1.35;
 }
 
-.about-section > div {
+.img-container {
   grid-column: span 5;
 }
 
 .about-section img {
   width: 100%;
   border-radius: 3px;
+}
+
+@media screen and (max-width: 1150px) {
+  .paragraphs-container {
+    grid-column: span 6;
+  }
+
+  .img-container {
+    grid-column: span 6;
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  .paragraphs-container {
+    grid-column: 1/ -1;
+  }
+
+  .img-container {
+    grid-column: 3 / 11;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .paragraphs-container {
+    grid-column: span 6;
+  }
+
+  .img-container {
+    grid-column: span 6;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .paragraphs-container {
+    grid-column: 1/ -1;
+  }
+
+  .img-container {
+    grid-column: 3 / 11;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .img-container {
+    grid-column: 1 / -1;
+  }
 }
 </style>

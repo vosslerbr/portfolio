@@ -61,4 +61,22 @@ li {
 a {
   display: inline-block;
 }
+
+@media screen and (max-width: 1050px) {
+  .project-card {
+    grid-column: span 12;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .project-card {
+    grid-column: span 6;
+  }
+}
+
+@media screen and (max-width: 730px) {
+  .project-card {
+    grid-column: span 12;
+  }
+}
 </style>
