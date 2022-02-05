@@ -20,38 +20,39 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios';
-import { ref, onMounted } from 'vue';
-import ContactCard from '../components/ContactCard.vue';
+  import axios from 'axios';
+  import { ref, onMounted } from 'vue';
+  import ContactCard from '../components/ContactCard.vue';
 
-// Projects page state
-const loading = ref(false);
-const errorOccurred = ref(false);
-const contact_cards = ref([]);
+  // Projects page state
+  const loading = ref(false);
+  const errorOccurred = ref(false);
+  const contact_cards = ref([]);
 
-// On page mount, fetch the Projects data
-onMounted(async () => {
-  try {
-    loading.value = true;
-    const response = await axios.get('http://localhost:1337/api/contact-cards?populate=*');
-    contact_cards.value = response.data.data;
-    loading.value = false;
-  } catch (error) {
-    console.error(error);
-    loading.value = false;
-    errorOccurred.value = true;
-  }
-});
+  // On page mount, fetch the Projects data
+  onMounted(async () => {
+    try {
+      loading.value = true;
+      const response = await axios.get('http://localhost:1337/api/contact-cards?populate=*');
+      contact_cards.value = response.data.data;
+      loading.value = false;
+    } catch (error) {
+      console.error(error);
+      loading.value = false;
+      errorOccurred.value = true;
+    }
+  });
 </script>
 
 <style scoped>
-p {
-  line-height: 0.8;
-}
-#card-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: 2rem;
-  margin-top: 2rem;
-}
+  p {
+    line-height: 1.35;
+    font-weight: bolder;
+  }
+  #card-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 2rem;
+    margin-top: 2rem;
+  }
 </style>

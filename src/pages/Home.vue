@@ -10,36 +10,36 @@
 <script setup lang="ts"></script>
 
 <style scoped>
-#home-page-content {
-  text-align: center;
-}
+  #home-page-content {
+    text-align: center;
+  }
 
-h1 {
-  font-size: 3rem;
-  font-weight: 900;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  line-height: 0.75;
-  transition: 0.2s;
-}
-
-h2 {
-  font-size: 2rem;
-  font-weight: 400;
-  text-transform: uppercase;
-  white-space: nowrap;
-  line-height: 0.75;
-  margin: 0px;
-  transition: 0.2s;
-}
-
-@media screen and (max-width: 480px) {
   h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    line-height: 0.75;
+    transition: var(--default-transition);
   }
 
   h2 {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 0.75;
+    margin: 0px;
+    transition: var(--default-transition);
   }
-}
+
+  @media screen and (max-width: 480px) {
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+    }
+  }
 </style>
