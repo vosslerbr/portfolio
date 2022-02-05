@@ -6,8 +6,10 @@
   --sharp-shadow: 0.5rem 0.5rem #052127;
   --sharp-shadow-hover: 0.75rem 0.75rem #052127;
   --border: 2px solid #052127;
-  --sharp-shadow-darkmode: ;
-  --sharp-shadow-hover-darkmode: ;
+  --border-darkmode: 2px solid #f7f7f7;
+  --sharp-shadow-darkmode: 0.5rem 0.5rem #f7f7f7;
+  --sharp-shadow-hover-darkmode: 0.75rem 0.75rem #f7f7f7;
+  --sharp-shadow-link-hover-darkmode: 0.75rem 0.75rem #f7f7f7;
   --normal-shadow: 0px 8px 15px #05212725;
   --font-color: #052127;
   --font-color-darkmode: #f7f7f7;
@@ -21,6 +23,11 @@ body {
   font-family: var(--main-font);
   font-size: var(--main-font-size);
   color: var(--font-color);
+}
+
+.dark-mode-body {
+  background-color: #27242b;
+  color: var(--font-color-darkmode);
 }
 
 body {

@@ -4,45 +4,31 @@
       <h2>Projects</h2>
 
       <div id="card-container">
-        <p v-if="loading">Loading projects...</p>
-        <p v-else-if="errorOccurred">An error occurred.</p>
+        <p v-if="store.loading">Loading projects...</p>
+        <p v-else-if="store.errorOccurred">An error occurred.</p>
 
-        <ProjectCard v-else v-for="(project, index) in projects" :key="index" :project="project" />
+        <ProjectCard
+          v-else
+          v-for="(project, index) in store.projects"
+          :key="index"
+          :project="project"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import axios from 'axios';
-import { ref, onMounted } from 'vue';
-import ProjectCard from '../components/ProjectCard.vue';
+  import ProjectCard from '../components/ProjectCard.vue';
+  import { useStore } from '../store/store';
 
-// Projects page state
-const loading = ref(false);
-const errorOccurred = ref(false);
-const projects = ref([]);
-
-// On page mount, fetch the Projects data
-onMounted(async () => {
-  try {
-    loading.value = true;
-    const response = await axios.get('http://localhost:1337/api/projects?populate=*');
-    console.log(response);
-    projects.value = response.data.data;
-    loading.value = false;
-  } catch (error) {
-    console.error(error);
-    loading.value = false;
-    errorOccurred.value = true;
-  }
-});
+  const store = useStore();
 </script>
 
 <style scoped>
-#card-container {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-gap: 2rem;
-}
+  #card-container {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-gap: 2rem;
+  }
 </style>

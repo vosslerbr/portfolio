@@ -1,9 +1,11 @@
 <template>
-  <div class="project-card">
+  <div
+    v-bind:class="store.darkModeEnabled ? `project-card dark-mode-project-card` : `project-card`"
+  >
     <router-link :to="{ path: '/project/' + project.id }">
       <div>
         <img
-          v-bind:src="`http://localhost:1337${project.attributes.thumbnail.data.attributes.formats.medium.url}`"
+          v-bind:src="`${project.attributes.thumbnail.data.attributes.formats.medium.url}`"
           v-bind:alt="project.attributes.thumbnail.data.attributes.alternativeText"
         />
       </div>
@@ -18,6 +20,9 @@
 </template>
 
 <script setup lang="ts">
+  import { useStore } from '../store/store';
+
+  const store = useStore();
   defineProps({
     project: Object,
   });
@@ -38,9 +43,24 @@
     box-shadow: var(--sharp-shadow);
   }
 
+  .dark-mode-project-card {
+    border: var(--border-darkmode);
+    background-color: #27242b;
+    color: var(--font-color-darkmode);
+    box-shadow: var(--sharp-shadow-darkmode);
+  }
+
+  .dark-mode-project-card a {
+    color: var(--font-color-darkmode);
+  }
+
   .project-card:hover {
     box-shadow: var(--sharp-shadow-hover);
     background-size: 100%;
+  }
+
+  .dark-mode-project-card:hover {
+    box-shadow: var(--sharp-shadow-hover-darkmode);
   }
 
   .project-card:hover a {

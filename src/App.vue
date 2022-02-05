@@ -7,9 +7,23 @@
         <div class="mobile-menu-line" id="mobile-menu-line3"></div>
       </div>
       <router-link to="/" id="logo-link"><img src="./assets/images/b-logo.svg" /></router-link>
+
+      <div id="toggle-container">
+        <p>Dark mode {{ store.darkModeEnabled ? `on` : `off` }}</p>
+        <div
+          id="dark-mode-toggle"
+          @click="handleDarkModeToggle"
+          v-bind:class="store.darkModeEnabled ? `dark-mode-on` : `dark-mode-off`"
+        >
+          <div
+            id="toggle-circle"
+            v-bind:class="store.darkModeEnabled ? `toggle-on` : `toggle-off`"
+          ></div>
+        </div>
+      </div>
     </header>
 
-    <aside id="desktop-nav">
+    <aside id="desktop-nav" v-bind:class="store.darkModeEnabled ? `sidebar-dark-mode-on` : ``">
       <nav>
         <ul>
           <li>
@@ -47,7 +61,7 @@
       <div>
         <div id="social-links">
           <a
-            v-for="(contact_card, index) in contact_cards"
+            v-for="(contact_card, index) in store.contact_cards"
             :key="index"
             v-bind:href="contact_card.attributes.link"
             target="_blank"
@@ -61,13 +75,13 @@
         <footer>
           <p>&copy; {{ new Date().getFullYear() }} Brady Vossler</p>
           <p>
-            Made with ❤️ using
+            Made with <span @click="handleRandomGradient" style="cursor: pointer">❤️</span> using
             <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a>
           </p>
         </footer>
       </div>
     </aside>
-    <aside id="mobile-nav">
+    <aside id="mobile-nav" v-bind:class="store.darkModeEnabled ? `sidebar-dark-mode-on` : ``">
       <nav>
         <ul>
           <li>
@@ -105,7 +119,7 @@
       <div>
         <div id="social-links">
           <a
-            v-for="(contact_card, index) in contact_cards"
+            v-for="(contact_card, index) in store.contact_cards"
             :key="index"
             v-bind:href="contact_card.attributes.link"
             target="_blank"
@@ -118,7 +132,7 @@
         <footer>
           <p>&copy; {{ new Date().getFullYear() }} Brady Vossler</p>
           <p>
-            Made with ❤️ using
+            Made with <span @click="handleRandomGradient" style="cursor: pointer">❤️</span> using
             <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a>
           </p>
         </footer>
@@ -135,36 +149,56 @@
   import { UserCircleIcon } from '@heroicons/vue/solid';
   import { AtSymbolIcon } from '@heroicons/vue/solid';
   import 'primeicons/primeicons.css';
+  import randomGradient from './helpers/randomGradient';
 
   import axios from 'axios';
   import { ref, onMounted } from 'vue';
+  import { useStore } from './store/store';
 
-  // Projects page state
-  const mobileMenuOpen = ref(false);
-  const loading = ref(false);
-  const errorOccurred = ref(false);
-  const contact_cards = ref([]);
+  const store = useStore();
 
   // On page mount, fetch the Projects data
   onMounted(async () => {
     try {
-      loading.value = true;
-      const response = await axios.get('http://localhost:1337/api/contact-cards?populate=*');
-      contact_cards.value = response.data.data;
-      loading.value = false;
+      store.loading = true;
+      const contactCardResponse = await axios.get(
+        'https://lit-reaches-99050.herokuapp.com/api/contact-cards?populate=*&sort=id'
+      );
+      store.contact_cards = contactCardResponse.data.data;
+
+      const projectsResponse = await axios.get(
+        'https://lit-reaches-99050.herokuapp.com/api/projects?populate=*&sort=id'
+      );
+
+      store.projects = projectsResponse.data.data;
+
+      const aboutSectionsResponse = await axios.get(
+        'https://lit-reaches-99050.herokuapp.com/api/about-sections?populate=*&sort=id'
+      );
+      store.about_sections = aboutSectionsResponse.data.data;
+
+      store.loading = false;
     } catch (error) {
       console.error(error);
-      loading.value = false;
-      errorOccurred.value = true;
+      store.loading = false;
+      store.errorOccurred = true;
     }
   });
+
+  const handleRandomGradient = () => {
+    const { gradient, newCurrentRandomNum } = randomGradient(store.currentRandomNum);
+
+    document.documentElement.style.setProperty('--gradient', gradient);
+
+    store.currentRandomNum = newCurrentRandomNum;
+  };
 
   const showHideNav = () => {
     const topMenuLine = document.getElementById('mobile-menu-line1');
     const centerMenuLine = document.getElementById('mobile-menu-line2');
     const bottomMenuLine = document.getElementById('mobile-menu-line3');
 
-    if (mobileMenuOpen.value) {
+    if (store.mobileMenuOpen) {
       // if the mobile menu is open, close it
       document.getElementById('mobile-nav').style.transform = 'translate(-20rem, 0)';
 
@@ -172,7 +206,7 @@
       topMenuLine.className = 'mobile-menu-line';
       bottomMenuLine.className = 'mobile-menu-line';
 
-      mobileMenuOpen.value = false;
+      store.mobileMenuOpen = false;
     } else {
       // otherwise, open it
       document.getElementById('mobile-nav').style.transform = 'translate(20rem, 0)';
@@ -180,7 +214,7 @@
       topMenuLine.className = 'mobile-menu-line top-menu-line-open';
       bottomMenuLine.className = 'mobile-menu-line bottom-menu-line-open';
 
-      mobileMenuOpen.value = true;
+      store.mobileMenuOpen = true;
     }
   };
 
@@ -194,9 +228,72 @@
       showHideNav();
     }
   };
+
+  const handleDarkModeToggle = () => {
+    if (store.darkModeEnabled) {
+      // if dark mode is ON, turn it off
+      document.querySelector('body').className = '';
+
+      store.darkModeEnabled = false;
+    } else {
+      // otherwise, turn it ON
+      document.querySelector('body').className = 'dark-mode-body';
+
+      store.darkModeEnabled = true;
+    }
+  };
 </script>
 
 <style scoped>
+  #toggle-container {
+    display: flex;
+    flex-direction: row;
+    margin-left: auto;
+    align-items: center;
+  }
+
+  #toggle-container p {
+    color: white;
+    font-size: 0.75rem;
+    margin-right: 0.5rem;
+    text-shadow: var(--normal-shadow);
+  }
+
+  #dark-mode-toggle {
+    transition: var(--default-transition);
+    padding: 4px;
+    width: 48px;
+    border-radius: 400px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: var(--normal-shadow);
+  }
+
+  .dark-mode-on {
+    background-color: #d277ff;
+  }
+  .dark-mode-off {
+    background-color: #f0f0f0;
+  }
+
+  #toggle-circle {
+    background-color: white;
+    box-shadow: var(--normal-shadow);
+    border-radius: 400px;
+    width: 16px;
+    height: 16px;
+    position: relative;
+    transition: var(--default-transition);
+  }
+
+  .toggle-on {
+    left: 24px;
+  }
+
+  .toggle-off {
+    left: 0px;
+  }
+
   header img {
     text-shadow: var(--normal-shadow);
   }
@@ -247,6 +344,19 @@
     text-shadow: var(--normal-shadow);
     background-color: #fff;
     box-shadow: var(--normal-shadow);
+  }
+
+  .sidebar-dark-mode-on {
+    background-color: #27242b;
+    color: var(--font-color-darkmode);
+  }
+
+  .sidebar-dark-mode-on a {
+    color: var(--font-color-darkmode);
+  }
+
+  .sidebar-dark-mode-on #social-links i {
+    color: var(--font-color-darkmode) !important;
   }
 
   #mobile-nav {

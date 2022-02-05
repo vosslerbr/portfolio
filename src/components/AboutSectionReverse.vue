@@ -2,8 +2,9 @@
   <div class="about-section">
     <div class="img-container">
       <img
-        v-bind:src="`http://localhost:1337${about_section.attributes.image.data.attributes.formats.large.url}`"
+        v-bind:src="`${about_section.attributes.image.data.attributes.formats.large.url}`"
         v-bind:alt="about_section.attributes.image.data.attributes.alternativeText"
+        v-bind:class="store.darkModeEnabled ? `about-img-dark-mode` : ``"
       />
     </div>
     <div class="paragraphs-container">
@@ -14,6 +15,9 @@
 
 <script setup lang="ts">
   import { computed } from 'vue';
+  import { useStore } from '../store/store';
+
+  const store = useStore();
 
   const props = defineProps({
     about_section: Object,
@@ -55,6 +59,11 @@
     transition: var(--default-transition);
     border: var(--border);
     box-shadow: var(--sharp-shadow);
+  }
+
+  .about-section img.about-img-dark-mode {
+    border: var(--border-darkmode);
+    box-shadow: var(--sharp-shadow-darkmode);
   }
 
   @media screen and (max-width: 1150px) {

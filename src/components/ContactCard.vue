@@ -1,5 +1,7 @@
 <template>
-  <div class="contact-card">
+  <div
+    v-bind:class="store.darkModeEnabled ? `contact-card dark-mode-contact-card` : `contact-card`"
+  >
     <a v-bind:href="contact_card.attributes.link" target="_blank">
       <div class="title-container">
         <i
@@ -16,6 +18,9 @@
 
 <script setup lang="ts">
   import 'primeicons/primeicons.css';
+  import { useStore } from '../store/store';
+
+  const store = useStore();
 
   defineProps({
     contact_card: Object,
@@ -36,11 +41,27 @@
     box-shadow: var(--sharp-shadow);
   }
 
+  .dark-mode-contact-card {
+    border: var(--border-darkmode);
+    background-color: #27242b;
+    color: var(--font-color-darkmode);
+    box-shadow: var(--sharp-shadow-darkmode);
+  }
+
+  .dark-mode-contact-card a {
+    color: var(--font-color-darkmode);
+  }
+  .dark-mode-contact-card i {
+    color: var(--font-color-darkmode) !important;
+  }
+
   .contact-card:hover {
     box-shadow: var(--sharp-shadow-hover);
     background-size: 100%;
   }
-
+  .dark-mode-contact-card:hover {
+    box-shadow: var(--sharp-shadow-hover-darkmode);
+  }
   .contact-card:hover > a {
     color: white;
   }
