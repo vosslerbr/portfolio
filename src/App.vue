@@ -75,7 +75,7 @@
         <footer>
           <p>&copy; {{ new Date().getFullYear() }} Brady Vossler</p>
           <p>
-            Made with <span @click="handleRandomGradient" style="cursor: pointer">❤️</span> using
+            Made with <span>❤️</span> using
             <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a>
           </p>
         </footer>
@@ -132,7 +132,7 @@
         <footer>
           <p>&copy; {{ new Date().getFullYear() }} Brady Vossler</p>
           <p>
-            Made with <span @click="handleRandomGradient" style="cursor: pointer">❤️</span> using
+            Made with <span>❤️</span> using
             <a href="https://v3.vuejs.org/" target="_blank">Vue 3</a>
           </p>
         </footer>
