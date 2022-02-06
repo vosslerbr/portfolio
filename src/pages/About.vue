@@ -3,7 +3,7 @@
     <div class="page-content">
       <h2>About</h2>
       <div id="section-container">
-        <p v-if="store.loading">Loading projects...</p>
+        <p v-if="store.loading">Loading About page...</p>
         <p v-else-if="store.errorOccurred">An error occurred.</p>
 
         <div

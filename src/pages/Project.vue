@@ -1,6 +1,6 @@
 <template>
   <div class="page">
-    <p v-if="store.loading">Loading projects...</p>
+    <p v-if="store.loading">Loading project...</p>
     <p v-else-if="store.errorOccurred">An error occurred.</p>
     <div v-else-if="Object.keys(project).length" class="page-content">
       <h2>{{ project.attributes.title }}</h2>
