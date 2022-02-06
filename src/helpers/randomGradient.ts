@@ -2,15 +2,15 @@ const randomGradient = (currentRandomNum: number) => {
   const randomNum = Math.floor(Math.random() * 5); // 0 - 9
 
   const gradients = [
-    `url('src/assets/images/imageedit_6_5544743324.png'),
+    `url('/assets/images/imageedit_6_5544743324.png'),
     linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)`,
-    `url('src/assets/images/imageedit_6_5544743324.png'),
+    `url('/assets/images/imageedit_6_5544743324.png'),
     linear-gradient(90deg, #FF9A8B 0%, #FF6A88 55%, #FF99AC 100%)`,
-    `url('src/assets/images/imageedit_6_5544743324.png'),
+    `url('/assets/images/imageedit_6_5544743324.png'),
     linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)`,
-    `url('src/assets/images/imageedit_6_5544743324.png'),
+    `url('/assets/images/imageedit_6_5544743324.png'),
     linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%)`,
-    `url('src/assets/images/imageedit_6_5544743324.png'),
+    `url('/assets/images/imageedit_6_5544743324.png'),
     linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%)`,
   ];
 
