@@ -1,7 +1,11 @@
-# Vue 3 + Vite
+# My portfolio
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is my new and improved web development portfolio.
 
-## Recommended IDE Setup
+It's built with Vue 3 and Vite, and uses Strapi as a headless CMS for the backend.
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+There's even a dark mode toggle 🤠
+
+I hope you enjoy looking at it as much as I enjoyed building it, and you can definitely reach out to me if you'd like.
+
+If you notice any problems, feel free to open a new issue here on GitHub.
