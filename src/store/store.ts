@@ -12,9 +12,15 @@ export const useStore = defineStore('portfolioStore', {
       loading: false,
       errorOccurred: false,
       darkModeEnabled: false,
-      contact_cards: [],
+      contact_cards: [] as {
+        title: string;
+        url: string;
+        username: string;
+        icon: string;
+        icon_color: string;
+      }[],
       projects: [],
-      about_sections: [],
+      about_sections: [] as { paragraph: string; image_url: string }[],
       mobileMenuOpen: false,
       currentRandomNum: 0,
     };

@@ -13,12 +13,10 @@
         <div
           id="dark-mode-toggle"
           @click="handleDarkModeToggle"
-          v-bind:class="store.darkModeEnabled ? `dark-mode-on` : `dark-mode-off`"
-        >
+          v-bind:class="store.darkModeEnabled ? `dark-mode-on` : `dark-mode-off`">
           <div
             id="toggle-circle"
-            v-bind:class="store.darkModeEnabled ? `toggle-on` : `toggle-off`"
-          ></div>
+            v-bind:class="store.darkModeEnabled ? `toggle-on` : `toggle-off`"></div>
         </div>
       </div>
     </header>
@@ -63,13 +61,12 @@
           <a
             v-for="(contact_card, index) in store.contact_cards"
             :key="index"
-            v-bind:href="contact_card.attributes.link"
+            v-bind:href="contact_card.url"
             target="_blank"
-            v-bind:title="contact_card.attributes.title"
+            v-bind:title="contact_card.title"
             ><i
-              v-bind:class="`pi ${contact_card.attributes.icon}`"
-              v-bind:style="`color: ${contact_card.attributes.icon_color}`"
-            ></i
+              v-bind:class="`pi ${contact_card.icon}`"
+              v-bind:style="`color: ${contact_card.icon_color}`"></i
           ></a>
         </div>
         <footer>
@@ -121,12 +118,11 @@
           <a
             v-for="(contact_card, index) in store.contact_cards"
             :key="index"
-            v-bind:href="contact_card.attributes.link"
+            v-bind:href="contact_card.url"
             target="_blank"
             ><i
-              v-bind:class="`pi ${contact_card.attributes.icon}`"
-              v-bind:style="`color: ${contact_card.attributes.icon_color}`"
-            ></i
+              v-bind:class="`pi ${contact_card.icon}`"
+              v-bind:style="`color: ${contact_card.icon_color}`"></i
           ></a>
         </div>
         <footer>
@@ -150,10 +146,12 @@
   import { AtSymbolIcon } from '@heroicons/vue/solid';
   import 'primeicons/primeicons.css';
   import randomGradient from './helpers/randomGradient';
+  import contactLinks from './assets/data/contactLinks';
 
   import axios from 'axios';
   import { ref, onMounted } from 'vue';
   import { useStore } from './store/store';
+  import about from './assets/data/about';
 
   const store = useStore();
 
@@ -161,10 +159,8 @@
   onMounted(async () => {
     try {
       store.loading = true;
-      const contactCardResponse = await axios.get(
-        'https://lit-reaches-99050.herokuapp.com/api/contact-cards?populate=*&sort=id'
-      );
-      store.contact_cards = contactCardResponse.data.data;
+      const contact_cards = contactLinks();
+      store.contact_cards = contact_cards;
 
       const projectsResponse = await axios.get(
         'https://lit-reaches-99050.herokuapp.com/api/projects?populate=*&sort=id'
@@ -172,10 +168,8 @@
 
       store.projects = projectsResponse.data.data;
 
-      const aboutSectionsResponse = await axios.get(
-        'https://lit-reaches-99050.herokuapp.com/api/about-sections?populate=*&sort=id'
-      );
-      store.about_sections = aboutSectionsResponse.data.data;
+      const aboutSectionsResponse = about();
+      store.about_sections = aboutSectionsResponse;
 
       store.loading = false;
     } catch (error) {

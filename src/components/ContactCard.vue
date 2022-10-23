@@ -1,17 +1,15 @@
 <template>
   <div
-    v-bind:class="store.darkModeEnabled ? `contact-card dark-mode-contact-card` : `contact-card`"
-  >
-    <a v-bind:href="contact_card.attributes.link" target="_blank">
+    v-bind:class="store.darkModeEnabled ? `contact-card dark-mode-contact-card` : `contact-card`">
+    <a v-bind:href="contact_card.url" target="_blank">
       <div class="title-container">
         <i
-          v-bind:class="`pi ${contact_card.attributes.icon}`"
-          v-bind:style="`color: ${contact_card.attributes.icon_color}`"
-        ></i>
-        <h3>{{ contact_card.attributes.title }}</h3>
+          v-bind:class="`pi ${contact_card.icon}`"
+          v-bind:style="`color: ${contact_card.icon_color}`"></i>
+        <h3>{{ contact_card.title }}</h3>
       </div>
 
-      <p>{{ contact_card.attributes.username }}</p>
+      <p>{{ contact_card.username }}</p>
     </a>
   </div>
 </template>
@@ -23,7 +21,10 @@
   const store = useStore();
 
   defineProps({
-    contact_card: Object,
+    contact_card: {
+      type: Object,
+      required: true,
+    },
   });
 </script>
 
