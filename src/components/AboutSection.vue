@@ -5,10 +5,8 @@
     </div>
     <div class="img-container">
       <img
-        v-bind:src="`${about_section.attributes.image.data.attributes.formats.large.url}`"
-        v-bind:alt="about_section.attributes.image.data.attributes.alternativeText"
-        v-bind:class="store.darkModeEnabled ? `about-img-dark-mode` : ``"
-      />
+        v-bind:src="`${about_section.image_url}`"
+        v-bind:class="store.darkModeEnabled ? `about-img-dark-mode` : ``" />
     </div>
   </div>
 </template>
@@ -20,11 +18,14 @@
   const store = useStore();
 
   const props = defineProps({
-    about_section: Object,
+    about_section: {
+      type: Object,
+      required: true,
+    },
   });
 
   const paragraphs = computed(() => {
-    return props.about_section.attributes.about_paragraph.split('\n');
+    return props.about_section.paragraph.split('\n');
   });
 </script>
 

@@ -6,13 +6,14 @@
       <div id="card-container">
         <p v-if="store.loading">Loading projects...</p>
         <p v-else-if="store.errorOccurred">An error occurred.</p>
+        <p>I'm in the process of gathering all my recent projects. Please check back later!</p>
 
-        <ProjectCard
+        <!-- <ProjectCard
           v-else
           v-for="(project, index) in store.projects"
           :key="index"
           :project="project"
-        />
+        /> -->
       </div>
     </div>
   </div>
@@ -30,5 +31,9 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     grid-gap: 2rem;
+  }
+
+  p {
+    grid-column: 1 / -1;
   }
 </style>

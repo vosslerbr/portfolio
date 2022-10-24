@@ -10,8 +10,7 @@
           v-else
           v-for="(about_section, index) in store.about_sections"
           :key="index"
-          class="about-section-container"
-        >
+          class="about-section-container">
           <AboutSectionReverse v-if="index % 2 === 0" :about_section="about_section" />
           <AboutSection v-else :about_section="about_section" />
         </div>
