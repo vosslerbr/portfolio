@@ -2,7 +2,7 @@ export default () => {
   return [
     {
       title: 'Email',
-      url: 'mailto:someone@yoursite.com',
+      url: 'mailto:bradyvossler@gmail.com',
       username: 'bradyvossler@gmail.com',
       icon: 'pi-send',
       icon_color: '#052127',
