@@ -140,18 +140,18 @@
 </template>
 
 <script setup lang="ts">
-  import { HomeIcon } from '@heroicons/vue/solid';
-  import { CollectionIcon } from '@heroicons/vue/solid';
-  import { UserCircleIcon } from '@heroicons/vue/solid';
-  import { AtSymbolIcon } from '@heroicons/vue/solid';
-  import 'primeicons/primeicons.css';
-  import randomGradient from './helpers/randomGradient';
-  import contactLinks from './assets/data/contactLinks';
+  import { HomeIcon } from "@heroicons/vue/solid";
+  import { CollectionIcon } from "@heroicons/vue/solid";
+  import { UserCircleIcon } from "@heroicons/vue/solid";
+  import { AtSymbolIcon } from "@heroicons/vue/solid";
+  import "primeicons/primeicons.css";
+  import randomGradient from "./helpers/randomGradient";
+  import contactLinks from "./assets/data/contactLinks";
 
-  import axios from 'axios';
-  import { ref, onMounted } from 'vue';
-  import { useStore } from './store/store';
-  import about from './assets/data/about';
+  import axios from "axios";
+  import { ref, onMounted } from "vue";
+  import { useStore } from "./store/store";
+  import about from "./assets/data/about";
 
   const store = useStore();
 
@@ -162,11 +162,11 @@
       const contact_cards = contactLinks();
       store.contact_cards = contact_cards;
 
-      const projectsResponse = await axios.get(
-        'https://lit-reaches-99050.herokuapp.com/api/projects?populate=*&sort=id'
-      );
+      // const projectsResponse = await axios.get(
+      //   'https://lit-reaches-99050.herokuapp.com/api/projects?populate=*&sort=id'
+      // );
 
-      store.projects = projectsResponse.data.data;
+      store.projects = [];
 
       const aboutSectionsResponse = about();
       store.about_sections = aboutSectionsResponse;
@@ -182,31 +182,31 @@
   const handleRandomGradient = () => {
     const { gradient, newCurrentRandomNum } = randomGradient(store.currentRandomNum);
 
-    document.documentElement.style.setProperty('--gradient', gradient);
+    document.documentElement.style.setProperty("--gradient", gradient);
 
     store.currentRandomNum = newCurrentRandomNum;
   };
 
   const showHideNav = () => {
-    const topMenuLine = document.getElementById('mobile-menu-line1');
-    const centerMenuLine = document.getElementById('mobile-menu-line2');
-    const bottomMenuLine = document.getElementById('mobile-menu-line3');
+    const topMenuLine = document.getElementById("mobile-menu-line1");
+    const centerMenuLine = document.getElementById("mobile-menu-line2");
+    const bottomMenuLine = document.getElementById("mobile-menu-line3");
 
     if (store.mobileMenuOpen) {
       // if the mobile menu is open, close it
-      document.getElementById('mobile-nav').style.transform = 'translate(-20rem, 0)';
+      document.getElementById("mobile-nav").style.transform = "translate(-20rem, 0)";
 
-      centerMenuLine.style.opacity = '1';
-      topMenuLine.className = 'mobile-menu-line';
-      bottomMenuLine.className = 'mobile-menu-line';
+      centerMenuLine.style.opacity = "1";
+      topMenuLine.className = "mobile-menu-line";
+      bottomMenuLine.className = "mobile-menu-line";
 
       store.mobileMenuOpen = false;
     } else {
       // otherwise, open it
-      document.getElementById('mobile-nav').style.transform = 'translate(20rem, 0)';
-      centerMenuLine.style.opacity = '0';
-      topMenuLine.className = 'mobile-menu-line top-menu-line-open';
-      bottomMenuLine.className = 'mobile-menu-line bottom-menu-line-open';
+      document.getElementById("mobile-nav").style.transform = "translate(20rem, 0)";
+      centerMenuLine.style.opacity = "0";
+      topMenuLine.className = "mobile-menu-line top-menu-line-open";
+      bottomMenuLine.className = "mobile-menu-line bottom-menu-line-open";
 
       store.mobileMenuOpen = true;
     }
@@ -226,12 +226,12 @@
   const handleDarkModeToggle = () => {
     if (store.darkModeEnabled) {
       // if dark mode is ON, turn it off
-      document.querySelector('body').className = '';
+      document.querySelector("body").className = "";
 
       store.darkModeEnabled = false;
     } else {
       // otherwise, turn it ON
-      document.querySelector('body').className = 'dark-mode-body';
+      document.querySelector("body").className = "dark-mode-body";
 
       store.darkModeEnabled = true;
     }
