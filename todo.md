@@ -1,5 +1,0 @@
-- Mobile layout fixes
-  - Nav breaks when coming out of mobile view (on resize)
-  - Hamburger menu doesn't transform
-  - Grid fixes for the page content
-- Color scheme
