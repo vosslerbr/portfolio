@@ -1,0 +1,77 @@
+/* === TAILWIND === */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  main {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  h1 {
+    @apply text-8xl font-bold text-center;
+  }
+
+  h2 {
+    @apply text-6xl font-bold text-center;
+  }
+
+  h3 {
+    @apply text-5xl font-bold tracking-wide;
+  }
+
+  p {
+    @apply text-3xl;
+  }
+}
+
+@layer components {
+  .funky-polls {
+    @apply bg-gradient-to-r from-violet-700 to-purple-500;
+  }
+  .knack-lens {
+    @apply bg-violet-500;
+  }
+}
+
+/* === CUSTOM === */
+.typescript {
+  background-color: #3178c6;
+}
+
+.javascript {
+  background-color: #f7df1e;
+}
+
+.react {
+  background-color: #61dafb;
+}
+
+.nodejs {
+  background-color: #3c873a;
+}
+
+.prisma {
+  background-color: #2d3748;
+}
+
+.postgresql {
+  background-color: #336791;
+}
+
+.mongodb {
+  background-color: #4ea94b;
+}
+
+.mysql {
+  background-color: #00758f;
+}
+
+/* === FONTS === */
+* {
+  font-family: "Dongle", sans-serif !important;
+}
